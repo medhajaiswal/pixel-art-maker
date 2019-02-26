@@ -1,28 +1,45 @@
+const HEIGHT = 12;
+const WIDTH = 12;
+const PALLETSIZE = 5;
+let currentColor = "white";
+const colorArray = ['red', 'blue', 'green', 'yellow','black'];
 let parentDiv = document.createElement("div")
-parentDiv.style.border = '1px solid black';
-parentDiv.style.backgroundColor = "white";
-parentDiv.style.height = "100%";
-parentDiv.style.width = "100%";
-document.body.appendChild(parentDiv)
-// parentDiv.innerHTML = "qwerty"
-let i;
-let j;
-for( i= 0; i<2; i++){
+parentDiv.className = "parentDiv"
+for (let i = 0; i < HEIGHT; i++) {
     let childDiv = document.createElement("div");
-    childDiv.setAttribute("id", "childDiv_"+i);
-    childDiv.style.border = '1px solid black';
-    childDiv.style.height = "50%";
-    childDiv.style.width = "100%";
-    childDiv.style.display = "flex";
-    parentDiv.appendChild(childDiv);
-    for(j= 0; j<2; j++) {
+    childDiv.className = "childDiv";
+    for (let j = 0; j < WIDTH; j++) {
         let grandChildDiv = document.createElement("div");
-        grandChildDiv.setAttribute("id", "grandChildDiv_"+j);
-        grandChildDiv.style.border = '1px solid black';
-        grandChildDiv.style.height = "100%";
-        grandChildDiv.style.width = "50%";
-        grandChildDiv.onclick = () => grandChildDiv.style.backgroundColor = "red"
+        grandChildDiv.className = "grandChildDiv";
+        grandChildDiv.onclick = () => grandChildDiv.style.backgroundColor = currentColor
         childDiv.appendChild(grandChildDiv);
-
     }
+    parentDiv.appendChild(childDiv);
 }
+document.body.appendChild(parentDiv);
+let palletDiv = document.createElement("div")
+palletDiv.className = "palletDiv";
+parentDiv.appendChild(palletDiv);
+for(let i = 0; i<PALLETSIZE; i++) {
+    let palletChildDiv = document.createElement("div");
+    palletChildDiv.className = "palletChildDiv";
+    palletChildDiv.style.backgroundColor = colorArray[i];
+    palletChildDiv.onclick = (event) => currentColor = event.target.style.backgroundColor;
+    palletDiv.appendChild(palletChildDiv);
+}
+
+/*palletChildDiv.onclick = (event) => {
+    currentColor = event.target.style.backgroundColor;
+}
+
+palletChildDiv1.onclick = (event) => {
+    currentColor = event.target.style.backgroundColor;
+}*/
+
+
+
+
+
+//}
+
+
